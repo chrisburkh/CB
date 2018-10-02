@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+
+  ravendb:
+    image: ravendb/ravendb
+    env_file: .ravenenv
+    ports:      
+      - "38888:38888"
+      - "8080:8080"
+    volumes:
+      - ravendb_compose:/opt/RavenDB/Server/RavenData
+  cbadmin:
+    image: cbadmin
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:      
+      - "4000:80"    
+    depends_on:
+      - ravendb
+    env_file: .env
+      
+volumes:
+  ravendb_compose: 

@@ -1,0 +1,50 @@
+﻿@model CBAdmin.Models.SystemInformation
+@{
+    ViewData["Title"] = "Home Page";
+}
+<br>
+<div>
+    <a asp-area="" asp-controller="Student" asp-action="">Students</a>
+    <br>
+    <a asp-area="" asp-controller="Teacher" asp-action="">Teachers</a>
+    <br>
+    <a asp-area="" asp-controller="Class" asp-action="">Classes</a>
+</div>
+
+<div>
+    <input id="ResetButton" type="button" value="Reset Database" onclick="ClickResetButton()" />
+
+</div>
+<br />
+<div>
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Message)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Message)
+        </dd>
+    </dl>
+</div>
+
+<script>
+    function ClickResetButton() {
+
+
+    $.ajax({
+        type: "POST",
+        url: '@Url.Action("ResetDatabase", "Home")',
+        async: true,
+        success: function (msg) {
+            ServiceSucceeded(msg);
+        },
+        error: function () {
+            return "error";
+        }
+    });
+    }
+
+
+</script>
+
+
