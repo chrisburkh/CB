@@ -1,0 +1,9 @@
+C:\Users\Burkhardt\source\repos\CB\Events\bin\Debug\netcoreapp2.1\Events.deps.json
+C:\Users\Burkhardt\source\repos\CB\Events\bin\Debug\netcoreapp2.1\Events.dll
+C:\Users\Burkhardt\source\repos\CB\Events\bin\Debug\netcoreapp2.1\Events.pdb
+C:\Users\Burkhardt\source\repos\CB\Events\obj\Debug\netcoreapp2.1\Events.csprojAssemblyReference.cache
+C:\Users\Burkhardt\source\repos\CB\Events\obj\Debug\netcoreapp2.1\Events.csproj.CoreCompileInputs.cache
+C:\Users\Burkhardt\source\repos\CB\Events\obj\Debug\netcoreapp2.1\Events.AssemblyInfoInputs.cache
+C:\Users\Burkhardt\source\repos\CB\Events\obj\Debug\netcoreapp2.1\Events.AssemblyInfo.cs
+C:\Users\Burkhardt\source\repos\CB\Events\obj\Debug\netcoreapp2.1\Events.dll
+C:\Users\Burkhardt\source\repos\CB\Events\obj\Debug\netcoreapp2.1\Events.pdb

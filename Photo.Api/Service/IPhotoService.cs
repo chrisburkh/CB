@@ -9,7 +9,7 @@ namespace Photo.Api.Service
 {
     public interface IPhotoService
     {
-        string WriteFile(string id, IFormFile formFile);
+        Task<string> WriteFile(string id, IFormFile formFile);
 
         Stream GetFile(string parentId);
     }

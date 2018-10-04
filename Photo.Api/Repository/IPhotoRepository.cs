@@ -9,7 +9,7 @@ namespace Photo.Api.Repository
 {
     public interface IPhotoRepository
     {
-        string WriteFile(string id, IFormFile formFile);
+        Task<string> WriteFile(string id, IFormFile formFile);
 
         Stream GetFile(string parentId);
     }

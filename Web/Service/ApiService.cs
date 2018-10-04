@@ -32,7 +32,6 @@ namespace CBAdmin.Service
 
             _photoUrl = Environment.GetEnvironmentVariable("Photo_url");
 
-            Console.WriteLine("Listening for Infrastructure on port: " + _infraUrl);
             _apiClient = httpClient;
         }
 
@@ -95,6 +94,7 @@ namespace CBAdmin.Service
         public async Task<string> UploadImage(string id, IFormFile avatar)
         {
 
+            Console.WriteLine("Upload Image to " + _photoUrl + id);
             var dataString = await _apiClient.PostAsync(_photoUrl + id, avatar);
             return dataString;
         }
@@ -102,6 +102,30 @@ namespace CBAdmin.Service
         public async Task<byte[]> DownloadImage(string id)
         {
             return await _apiClient.GetRawBodyBytesAsync(_photoUrl + id);
+        }
+
+        public async Task<IEnumerable<Class>> GetAllClasses()
+        {
+            var dataString = await _apiClient.GetStringAsync(_personsUrl + _baseUrl);
+            return JsonConvert.DeserializeObject<IEnumerable<Class>>(dataString);
+        }
+
+        public async Task<IEnumerable<Teacher>> GetAllTeacher()
+        {
+            var dataString = await _apiClient.GetStringAsync(_personsUrl + "teacher");
+            return JsonConvert.DeserializeObject<IEnumerable<Teacher>>(dataString);
+        }
+
+        public async Task<IEnumerable<Course>> GetAllCourse()
+        {
+            var dataString = await _apiClient.GetStringAsync(_personsUrl + "course");
+            return JsonConvert.DeserializeObject<IEnumerable<Course>>(dataString);
+        }
+
+        public async Task<IEnumerable<Student>> GetAllStudent()
+        {
+            var dataString = await _apiClient.GetStringAsync(_personsUrl + "student");
+            return JsonConvert.DeserializeObject<IEnumerable<Student>>(dataString);
         }
     }
 }

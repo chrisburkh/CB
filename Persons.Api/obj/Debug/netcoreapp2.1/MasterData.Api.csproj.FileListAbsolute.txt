@@ -1,0 +1,15 @@
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\bin\Debug\netcoreapp2.1\MasterData.Api.deps.json
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\bin\Debug\netcoreapp2.1\MasterData.Api.runtimeconfig.json
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\bin\Debug\netcoreapp2.1\MasterData.Api.runtimeconfig.dev.json
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\bin\Debug\netcoreapp2.1\MasterData.Api.dll
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\bin\Debug\netcoreapp2.1\MasterData.Api.pdb
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.csprojAssemblyReference.cache
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.csproj.CoreCompileInputs.cache
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.RazorAssemblyInfo.cache
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.RazorAssemblyInfo.cs
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.AssemblyInfoInputs.cache
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.AssemblyInfo.cs
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.RazorTargetAssemblyInfo.cache
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.dll
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\MasterData.Api.pdb
+C:\Users\Burkhardt\source\repos\CB\Persons.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

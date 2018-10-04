@@ -48,7 +48,7 @@ namespace Photo.Api.Repository
             return store;
         }
 
-        public string WriteFile(string id, IFormFile formFile)
+        public async Task<string> WriteFile(string id, IFormFile formFile)
         {
             using (var session = _store.OpenSession())
             {

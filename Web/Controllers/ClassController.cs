@@ -13,60 +13,40 @@ namespace CBAdmin.Controllers
 {
     public class ClassController : Controller
     {
-        private IService<Class> _service;
 
-        public ClassController(IService<Class> classService)
+        private IApiService<Class> _api;
+
+        public ClassController(IApiService<Class> apiService)
         {
-            _service = classService;
+
+            _api = apiService;
+            _api.SetBaseUrl(typeof(Class).Name.ToLower());
         }
         // GET: Class
         public async Task<IActionResult> Index()
         {
-
-            var list = (await _service.GetEntityListAsynch());
-
-            var session = _service.GetSession();
-
-            var clazzes = session.Query<Class>().Include(r => r.TeacherID).Include(r => r.CourseID).ToList<Class>();
-
-            foreach (Class clazz in clazzes)
-            {
-                clazz.Teacher = session.Load<Teacher>(clazz.TeacherID);
-                clazz.Course = session.Load<Course>(clazz.CourseID);
-            }
-
-            clazzes = clazzes.OrderBy(x => x.Course.Abbreviation).ToList();
-
-            return View(clazzes);
+            return View(await _api.GetAllClasses());
 
         }
 
         // GET: Class/Details/5
-        public ActionResult Details(string id)
+        public async Task<ActionResult> Details(string id)
         {
-            using (var session = _service.GetSession())
-            {
 
-                var clazz = session.Include("TeacherID").Include("CourseID").Load<Class>(id);
+            var clazz = await _api.Get(id);
 
-                clazz.Teacher = session.Load<Teacher>(clazz.TeacherID);
-                clazz.Course = session.Load<Course>(clazz.CourseID);
+            return View(clazz);
 
-                return View(clazz);
-            }
         }
 
         // GET: Class/Create
-        public ActionResult Create()
+        public async Task<ActionResult> Create()
         {
-
-            var session = _service.GetSession();
-
-            var listTeacher = session.Query<Teacher>().ToList();
+            var listTeacher = await _api.GetAllTeacher();
 
             ViewData["TeacherID"] = new SelectList(listTeacher, "Id", "FullName");
 
-            var listCourse = session.Query<Course>().ToList();
+            var listCourse = await _api.GetAllCourse();
 
             ViewData["CourseID"] = new SelectList(listCourse, "Id", "Subject");
             return View();
@@ -75,7 +55,7 @@ namespace CBAdmin.Controllers
         // POST: Class/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Class claz)
+        public async Task<ActionResult> Create(Class claz)
         {
             try
             {
@@ -86,7 +66,7 @@ namespace CBAdmin.Controllers
                 }
 
 
-                _service.WriteEntity(claz);
+                await _api.Write(claz);
 
                 return RedirectToAction("Index");
             }
@@ -97,14 +77,14 @@ namespace CBAdmin.Controllers
         }
 
         // GET: Class/Edit/5
-        public ActionResult Edit(string id)
+        public async Task<ActionResult> Edit(string id)
         {
-            var clazz = _service.GetEntity(id);
+            var clazz = await _api.Get(id);
 
-            var session = _service.GetSession();
 
-            var listTeacher = session.Query<Teacher>().ToList();
-            var listCourse = session.Query<Course>().ToList();
+
+            var listTeacher = await _api.GetAllTeacher();
+            var listCourse = await _api.GetAllCourse();
 
             ViewData["TeacherID"] = new SelectList(listTeacher, "Id", "FullName", clazz.TeacherID);
             ViewData["CourseID"] = new SelectList(listCourse, "Id", "Subject", clazz.CourseID);
@@ -115,7 +95,7 @@ namespace CBAdmin.Controllers
                 clazz.SelectedStudents.Add(new Student().Id = s.Id);
             }
 
-            List<Student> listStudent = session.Query<Student>().ToList();
+            List<Student> listStudent = _api.GetAllStudent().Result.ToList();
 
             clazz.Students = listStudent;
 
@@ -126,21 +106,23 @@ namespace CBAdmin.Controllers
         // POST: Class/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Class clazz)
+        public async Task<ActionResult> Edit(Class clazz)
         {
             try
             {
                 clazz.Students = new List<Student>();
-                var session = _service.GetSession();
 
                 foreach (String id in clazz.SelectedStudents)
                 {
-                    var student = session.Load<Student>(id);
-                    clazz.Students.Add(student);
-                }
+
+                    Student s = new Student();
+                    s.Id = id;
+                    clazz.Students.Add(s);
+                };
 
 
-                _service.WriteEntity(clazz);
+
+                await _api.Write(clazz);
 
                 return RedirectToAction("Index");
             }
@@ -150,20 +132,12 @@ namespace CBAdmin.Controllers
             }
         }
 
-        private void PopulateDepartmentsDropDownList(object selectedDepartment = null)
-        {
 
-            var session = _service.GetSession();
-
-            var list = session.Query<Teacher>().ToList();
-
-            ViewBag.Teacher = new SelectList(list, "Id", "FullName", selectedDepartment);
-        }
 
         // GET: Class/Delete/5
         public ActionResult Delete(string id)
         {
-            var student = _service.GetEntity(id);
+            var student = _api.Get(id);
 
             return View();
         }
@@ -171,14 +145,11 @@ namespace CBAdmin.Controllers
         // POST: Class/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(Class claz)
+        public async Task<ActionResult> Delete(Class claz)
         {
-
-
-            _service.DeleteEntity(claz.Id);
+            await _api.Delete(claz.Id);
 
             return RedirectToAction("Index");
-
         }
     }
 }

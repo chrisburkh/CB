@@ -27,7 +27,19 @@ namespace Photo.Api.Controllers
 
         }
 
+        [HttpGet]
+        public ActionResult<string> Get()
+        {
+            return "this is working 111!!!";
 
+        }
+
+        [HttpGet("test/{id}")]
+        public ActionResult<string> GetTest()
+        {
+            return StatusCode(500);
+
+        }
 
         // GET api/photos/5
         [HttpGet("{id}")]
@@ -43,7 +55,7 @@ namespace Photo.Api.Controllers
                 }
                 else
                 {
-                    return null;
+                    return NotFound();
                 }
             }
 
@@ -51,8 +63,11 @@ namespace Photo.Api.Controllers
 
 
         [HttpPost("{id}")]
-        public string Post(string id)
+        public async Task<IActionResult> Post(string id)
         {
+
+            Console.WriteLine("incoming post for " + id);
+
             if (Request.HasFormContentType)
             {
                 var form = Request.Form;
@@ -60,11 +75,11 @@ namespace Photo.Api.Controllers
                 {
                     Console.WriteLine(formFile.FileName);
 
-
-                    return _service.WriteFile(id, formFile);
+                    await _service.WriteFile(id, formFile);
+                    return Ok(formFile.FileName);
                 }
             }
-            return "";
+            return BadRequest();
 
         }
     }

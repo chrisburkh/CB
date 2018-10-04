@@ -26,9 +26,9 @@ namespace Photo.Api.Service
 
         }
 
-        public string WriteFile(string id, IFormFile formFile)
+        public async Task<string> WriteFile(string id, IFormFile formFile)
         {
-            return _repo.WriteFile(id, formFile);
+            return await _repo.WriteFile(id, formFile);
         }
     }
 }

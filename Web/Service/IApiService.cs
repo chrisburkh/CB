@@ -24,5 +24,12 @@ namespace CBAdmin.Service
         Task<string> UploadImage(string id, IFormFile avatar);
 
         Task<byte[]> DownloadImage(string id);
+        Task<IEnumerable<Class>> GetAllClasses();
+        Task<IEnumerable<Teacher>> GetAllTeacher();
+
+        Task<IEnumerable<Course>> GetAllCourse();
+
+        Task<IEnumerable<Student>> GetAllStudent();
+
     }
 }

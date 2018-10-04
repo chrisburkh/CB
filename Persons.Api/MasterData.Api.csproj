@@ -4,6 +4,8 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <DockerTargetOS>Windows</DockerTargetOS>
     <UserSecretsId>257f1eaf-c834-45b9-a64d-e38960b60c91</UserSecretsId>
+    <AssemblyName>MasterData.Api</AssemblyName>
+    <RootNamespace>MasterData.Api</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,6 +14,9 @@
 
   <ItemGroup>
     <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="MassTransit" Version="5.1.5" />
+    <PackageReference Include="MassTransit.Autofac" Version="5.1.5" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="5.1.5" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.0.1916590" />
     <PackageReference Include="RavenDB.Client" Version="4.1.1" />

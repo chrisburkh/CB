@@ -22,9 +22,9 @@ C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.c
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.csproj.CoreCompileInputs.cache
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.RazorAssemblyInfo.cache
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.RazorAssemblyInfo.cs
-C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.AssemblyInfoInputs.cache
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.AssemblyInfo.cs
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.RazorTargetAssemblyInfo.cache
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.dll
 C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\Photo.Api.pdb
+C:\Users\Burkhardt\source\repos\CB\Photo.Api\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs

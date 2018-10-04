@@ -1,5 +1,6 @@
 ﻿
 
+using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
@@ -65,6 +66,8 @@ namespace Http
             };
 
             var response = await Client.SendAsync(requestMessage);
+
+            Console.WriteLine("Upload Status Code: " + response.StatusCode);
 
             if (response.StatusCode == HttpStatusCode.InternalServerError)
             {

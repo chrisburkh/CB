@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Events;
+using MassTransit;
+using Microsoft.Extensions.Configuration;
 using Persons.Api.Models;
 using Raven.Client.Documents;
 using System;
@@ -13,14 +15,16 @@ namespace Persons.Api.Repository
         private string _RavendbUrl;
 
         private DocumentStore _store;
+        private readonly IBus _bus;
 
         private readonly string RavenDefault = "http://localhost:8080";
 
-        public PersonsRepository(IConfiguration config)
+        public PersonsRepository(IConfiguration config, IBus bus)
         {
             _RavendbUrl = Environment.GetEnvironmentVariable("CBADMIN_ravendb_url");
 
             _store = CreateStore();
+            _bus = bus;
         }
 
         private DocumentStore CreateStore()
@@ -80,6 +84,10 @@ namespace Persons.Api.Repository
             var x = await session.LoadAsync<T>(id);
             session.Delete(x);
             await session.SaveChangesAsync();
+
+            // per Message mögliche Bilder löschen
+
+            await _bus.Publish<PhotoDeleteEvent>(new { id });
 
             return id;
         }

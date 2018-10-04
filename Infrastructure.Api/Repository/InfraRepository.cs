@@ -65,5 +65,14 @@ namespace Infrastructure.Api.Repository
                 return "created at: " + fromDB.CreateTime + " with the server " + ipAddress;
             }
         }
+
+
+        //TODO:
+        public void Export()
+        {
+            var session = _store.OpenSession();
+
+            //session.Advanced.DocumentStore.Smuggler.ExportAsync();
+        }
     }
 }

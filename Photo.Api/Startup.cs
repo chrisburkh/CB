@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Photo.Api.Messaging.Consumer;
 using Photo.Api.Repository;
 using Photo.Api.Service;
 
@@ -39,6 +41,35 @@ namespace Photo.Api
 
 
             var builder = new ContainerBuilder();
+
+            // register a specific consumer
+            builder.RegisterType<PhotoDeleteConsumer>();
+
+            builder.Register(context =>
+            {
+                var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    var host = cfg.Host(new Uri("rabbitmq://rabbitmq/"), h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+
+                    // https://stackoverflow.com/questions/39573721/disable-round-robin-pattern-and-use-fanout-on-masstransit
+                    cfg.ReceiveEndpoint(host, "dotnetgigs" + Guid.NewGuid().ToString(), e =>
+                    {
+                        e.LoadFrom(context);
+                        //e.Consumer<ApplicantAppliedConsumer>();
+                    });
+                });
+
+                return busControl;
+            })
+                .SingleInstance()
+                .As<IBusControl>()
+                .As<IBus>();
+
+
             builder.Populate(services);
             ApplicationContainer = builder.Build();
 
