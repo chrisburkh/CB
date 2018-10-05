@@ -24,7 +24,9 @@ namespace Persons.Api.Controllers
         [HttpGet]
         public async Task<IEnumerable<Student>> Get()
         {
-            return await _rep.GetAll();
+            var list = (await _rep.GetAll()).OrderBy(x => x.LastName);
+
+            return list;
         }
 
 
