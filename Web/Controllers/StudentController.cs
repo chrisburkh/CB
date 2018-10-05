@@ -41,7 +41,6 @@ namespace CBAdmin.Controllers
 
         public async Task<ActionResult> RenderImage(string id)
         {
-
             byte[] photoBack = await _api.DownloadImage(id);
 
             return File(photoBack, "image/png");

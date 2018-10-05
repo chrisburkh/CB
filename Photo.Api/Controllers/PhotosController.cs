@@ -27,24 +27,12 @@ namespace Photo.Api.Controllers
 
         }
 
-        [HttpGet]
-        public ActionResult<string> Get()
-        {
-            return "this is working 111!!!";
-
-        }
-
-        [HttpGet("test/{id}")]
-        public ActionResult<string> GetTest()
-        {
-            return StatusCode(500);
-
-        }
 
         // GET api/photos/5
         [HttpGet("{id}")]
         public ActionResult<IActionResult> Get(string id)
         {
+
             var input = _service.GetFile(id);
 
             using (MemoryStream ms = new MemoryStream())
@@ -65,9 +53,6 @@ namespace Photo.Api.Controllers
         [HttpPost("{id}")]
         public async Task<IActionResult> Post(string id)
         {
-
-            Console.WriteLine("incoming post for " + id);
-
             if (Request.HasFormContentType)
             {
                 var form = Request.Form;

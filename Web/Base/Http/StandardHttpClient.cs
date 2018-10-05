@@ -101,6 +101,8 @@ namespace Http
             var response = await Client.SendAsync(requestMessage);
             //return await response.Content.ReadAsStringAsync();
 
+            Console.WriteLine("Response for image " + response.StatusCode);
+
             using (var ms = new MemoryStream())
             {
                 await response.Content.CopyToAsync(ms);

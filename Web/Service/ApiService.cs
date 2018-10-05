@@ -58,15 +58,17 @@ namespace CBAdmin.Service
 
         public async Task<IEnumerable<T>> GetAll()
         {
-            var dataString = await _apiClient.GetStringAsync(_personsUrl + _baseUrl);
-            return JsonConvert.DeserializeObject<IEnumerable<T>>(dataString);
+            return await GetAll("");
         }
 
 
         public async Task<IEnumerable<T>> GetAll(string searchstring)
         {
+
             var dataString = await _apiClient.GetStringAsync(_personsUrl + _baseUrl + "?search=" + searchstring);
+
             return JsonConvert.DeserializeObject<IEnumerable<T>>(dataString);
+
         }
 
         public async Task Write(T student)
@@ -86,15 +88,23 @@ namespace CBAdmin.Service
             string url = _infraUrl + "systemsettings/";
             Console.WriteLine(url);
 
-            var dataString = await _apiClient.GetStringAsync(url);
+            try
+            {
 
-            return dataString;
+                var dataString = await _apiClient.GetStringAsync(url);
+                return dataString;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("no connection to infrastrucure: " + ex.Message);
+                return "no connection";
+            }
+
+
         }
 
         public async Task<string> UploadImage(string id, IFormFile avatar)
         {
-
-            Console.WriteLine("Upload Image to " + _photoUrl + id);
             var dataString = await _apiClient.PostAsync(_photoUrl + id, avatar);
             return dataString;
         }

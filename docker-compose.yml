@@ -23,7 +23,7 @@ services:
     env_file: .env
 
   photo.api:
-    image: photos.api
+    image: photo.api
     build:
       context: ./photo.api
       dockerfile: Dockerfile
@@ -43,10 +43,10 @@ services:
       - "5001:80"
     env_file: .env
 
-  persons.api:
-    image: persons.api
+  masterdata.api:
+    image: masterdata.api
     build:
-      context: ./persons.api
+      context: ./masterdata.api
       dockerfile: Dockerfile
     ports:      
       - "5002:80"

@@ -1,0 +1,65 @@
+version: '3.4'
+
+services:
+
+  ravendb:
+    image: ravendb/ravendb
+    env_file: .ravenenv
+    ports:      
+      - "38888:38888"
+      - "8080:8080"
+    volumes:
+      - ravendb_compose:/opt/RavenDB/Server/RavenData
+
+  cbweb:
+    image: cbweb
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:      
+      - "4000:80"    
+    depends_on:
+      - ravendb
+    env_file: .env
+
+  photo.api:
+    image: photos.api
+    build:
+      context: ./photo.api
+      dockerfile: Dockerfile
+    ports:      
+      - "5003:80"
+    env_file: .env
+    depends_on: 
+      - rabbitmq
+      - ravendb
+
+  infrastructure.api:
+    image: infrastructure.api
+    build:
+      context: ./infrastructure.api
+      dockerfile: Dockerfile
+    ports:
+      - "5001:80"
+    env_file: .env
+
+  persons.api:
+    image: persons.api
+    build:
+      context: ./persons.api
+      dockerfile: Dockerfile
+    ports:      
+      - "5002:80"
+    env_file: .env
+    depends_on: 
+      - rabbitmq
+      - ravendb
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "15672:15672"
+    container_name: rabbitmq
+
+volumes:
+  ravendb_compose: 
